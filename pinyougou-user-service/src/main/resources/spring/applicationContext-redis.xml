@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--连接redis服务器 连接redis服务器的配置-->
+    <bean class="org.springframework.data.redis.connection.RedisStandaloneConfiguration" id="standaloneConfig">
+        <property name="hostName" value="192.168.25.133"></property>
+        <property name="port" value="6379"></property>
+    </bean>
+    <!--连接工厂的配置-->
+
+    <bean class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" id="redisConnectionFactory">
+        <constructor-arg name="standaloneConfig" ref="standaloneConfig"></constructor-arg>
+    </bean>
+
+    <!--配置核心的模板类RedisTemplate-->
+
+    <bean class="org.springframework.data.redis.core.RedisTemplate" id="redisTemplate">
+        <property name="connectionFactory" ref="redisConnectionFactory"></property>
+    </bean>
+
+
+</beans>
