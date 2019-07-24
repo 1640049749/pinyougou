@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:elasticsearch="http://www.springframework.org/schema/data/elasticsearch"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/data/elasticsearch http://www.springframework.org/schema/data/elasticsearch/spring-elasticsearch.xsd">
+
+    <!--配置组件扫描 接口所在的包-->
+    <elasticsearch:repositories base-package="com.pinyougou.es.dao"></elasticsearch:repositories>
+    <!--服务器地址-->
+    <elasticsearch:transport-client id="client" cluster-name="elasticsearch" cluster-nodes="127.0.0.1:9300"></elasticsearch:transport-client>
+
+    <!--elasticsearchTemplate核心类-->
+    <bean class="org.springframework.data.elasticsearch.core.ElasticsearchTemplate" id="elasticsearchTemplate">
+        <constructor-arg name="client" ref="client"></constructor-arg>
+    </bean>
+
+    <bean class="com.pinyougou.es.service.impl.ImportServiceImpl" id="importService"></bean>
+
+    <import resource="applicationContext-dao.xml"></import>
+
+</beans>
