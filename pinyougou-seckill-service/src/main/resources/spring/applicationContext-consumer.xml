@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--1.配置消费者对象-->
+    <bean class="org.apache.rocketmq.client.consumer.DefaultMQPushConsumer" init-method="start" destroy-method="shutdown">
+        <!--2.nameserv-->
+        <property name="namesrvAddr" value="127.0.0.1:9876"></property>
+        <!--3.消费者组-->
+        <property name="consumerGroup" value="consmer_seckill_group"></property>
+        <!--4.订阅主题-->
+        <property name="subscription">
+            <map>
+                <!--主题 goods_topic 下的Tags_genHtml tag的消息-->
+                <entry  key="TOPIC_SECKILL" value="*"></entry>
+            </map>
+        </property>
+        <!--5.模式  广播的模式  可以多个消费者一起消费一个消息 ，也就是说一个消费者可以被多个消费者消费-->
+        <property name="messageModel" value="CLUSTERING"></property>
+        <!--6.设置监听器-->
+        <property name="messageListener" ref="messageListener"></property>
+    </bean>
+    <!--监听器 对象 用于监听消息  获取消息内容进行相关的操作-->
+    <bean class="com.pinyougou.seckill.listener.PageMessageListener" id="messageListener"></bean>
+</beans>
