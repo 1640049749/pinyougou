@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!--配置dubbo的应用 名称唯一 不重复-->
+    <dubbo:application name="myconsumer"></dubbo:application>
+    <!--配置注册中心-->
+    <dubbo:registry protocol="zookeeper" address="192.168.25.128" port="2181"></dubbo:registry>
+    <!--组件扫描controller-->
+    <context:component-scan base-package="com.itheima.dubbo.controller"></context:component-scan>
+    <!--注解驱动-->
+    <mvc:annotation-driven></mvc:annotation-driven>
+    <!--增加引用远程服务配置-->
+    <!--<dubbo:reference interface="com.itheima.dubbo.service.TestService" id="testService"></dubbo:reference>-->
+
+    <dubbo:annotation package="com.itheima.dubbo.controller"></dubbo:annotation>
+
+</beans>
