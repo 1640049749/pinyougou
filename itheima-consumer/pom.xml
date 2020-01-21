@@ -17,7 +17,7 @@
         <!--设置编译的版本使用1.8版本-->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <spring.version>5.0.2.RELEASE</spring.version>
+        <spring.version>5.2.3.RELEASE</spring.version>
         <dubbo.version>2.6.1</dubbo.version>
         <zookeeper.version>3.4.7</zookeeper.version>
         <curator-framework.version>4.0.1</curator-framework.version>
